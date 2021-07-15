@@ -62,13 +62,7 @@ void buzzer_advance()
     }
   }
 }
-
-void toggle_green()
-{
-  green_on ^= 1;
-  led_changed = 1;
-  led_update();
-}
+void toggle_green();
 
 void toggle_red()
 {
