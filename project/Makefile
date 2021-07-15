@@ -17,10 +17,10 @@ run-s.elf: ${COMMON_OBJECTS} p1_interrupt_handler.o main.o buzzer.o switches.o s
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load-c: run-c.elf
-	msp430loader.sh run.elf
+	msp430loader.sh $^
 
 load-s: run-s.elf
-	msp430loader.sh run.elf
+	msp430loader.sh $^
 
 clean:
 	rm -f *.o *.elf *~

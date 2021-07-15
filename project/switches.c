@@ -1,6 +1,8 @@
 #include <msp430.h>
 #include "switches.h"
 #include "led.h"
+#include "buzzer.h"
+#include "stateMachines.h"
 
 char switch_state_down_1, switch_state_changed; /* effectively boolean */
 char switch_state_down_2; /* effectively boolean */
@@ -37,5 +39,34 @@ switch_interrupt_handler()
   switch_state_down_3 = (p2val & SW3) ? 0 : 1; /* 0 when SW3 is up */
   switch_state_down_4 = (p2val & SW4) ? 0 : 1; /* 0 when SW4 is up */
   switch_state_changed = 1;
-  led_update();
+
+  // Green light and buzzer on and off with button
+  if (switch_state_down_1) {
+    green_on = 1;
+    led_changed = 1;
+    led_update();
+    buzzer_set_period(2345);
+  }
+  else if (!switch_state_down_1) {
+    green_on = 0;
+    led_changed = 1;
+    led_update();
+    buzzer_set_period(0);
+  }
+
+  // Flashes red light and buzzer every second
+  if (switch_state_down_2) {
+    toggle_red();
+    if (red_on)
+      buzzer_set_period(1234);
+    else
+      buzzer_set_period(0);
+  }
+  
+  // Turn lights and buzzer off
+  if (switch_state_down_4) {
+    turn_off_rg();
+    buzzer_set_period(0);
+  }
+  
 }

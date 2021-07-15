@@ -4,9 +4,7 @@
 #include "switches.h"
 #include "buzzer.h"
 
-
-void state_advance()
-{
+void state_advance() { /*
   // Toggles green led and buzzer
   if (switch_state_down_1) {
     toggle_green();
@@ -31,7 +29,7 @@ void state_advance()
   else if (switch_state_down_4) {
     turn_off_rg();
     buzzer_set_period(0);
-  }
+    }*/
 }
 
 void buzzer_advance()

@@ -6,8 +6,9 @@
 void
 __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
   static char blink_count = 0;
-  if (++blink_count == 62) {         //every 1/4 of a second 
+  if (++blink_count == 250) {         //every 1/4 of a second 
     state_advance();
+    switch_interrupt_handler();
     blink_count = 0;
   }
 
@@ -17,3 +18,4 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
     buzz_count = 0;
   }
 }
+

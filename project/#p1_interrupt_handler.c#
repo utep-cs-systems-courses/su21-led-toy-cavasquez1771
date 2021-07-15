@@ -1,6 +1,6 @@
 #include <msp430.h>
 #include "switches.h"
-#include "stateMachines.h"
+#include "stateMachine.c"
 
 /* Switch on P2 (S2) */
 void
